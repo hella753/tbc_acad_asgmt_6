@@ -1,4 +1,4 @@
-# DB Operation with SqlAlchemy
+# DB Operations with SqlAlchemy
 
 ## Description
 Books database with fake random data created and managed with SQLAlchemy.
