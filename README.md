@@ -2,15 +2,15 @@
 
 ## Description
 Books database with fake random data created and managed with sqlAlchemy.
-database consists of three tables for '**books**' with 1000 records, '**authors**' with 500 records
+Database consists of three tables for '**books**' with 1000 records, '**authors**' with 500 records
 and an association table for '**authors_and_books**'. Uses many-to-many relationship.
 
 **The Books Database holds detailed information about published books and authors for effective data management.** 
 ### **'books' table fields.**
 
-| id | Name   | Category   | Number_of_Pages | Date   | Author_ID |
-|----|--------|------------|-----------------|--------|-----------|
-| 1  | _name_ | _category_ |  _num of pages_ | _date_ | _id_num_  |
+| id | Name   | Category   | Number_of_Pages | Date   |
+|----|--------|------------|-----------------|--------|
+| 1  | _name_ | _category_ |  _num of pages_ | _date_ |
 
 **'books'** table **primary key** is **'id'** 
 
@@ -27,6 +27,7 @@ and an association table for '**authors_and_books**'. Uses many-to-many relation
 | 1  | _id_num_  | _id_num_ |
 
 **'authors_and_books'** table **primary key** is **id** and also has an autoincrement constraint.
+**foreign keys** are **author_id** and **book_id**
 
 ## Components
 * **Database**: Handles the database operations like initializing database and inserting data. 
@@ -37,12 +38,21 @@ and an association table for '**authors_and_books**'. Uses many-to-many relation
 Is responsible for generating random data and associating data to authors and books.
 * **Tasks**: Fetches the records from the database tables according to tasks provided.
 
+
+## **Features** ##
+* Creates a database with three tables.
+* `generate_fake_data()` in `database.py` creates the DataGenerator instance to access its methods from the script.
+* With `insert_data()` in `database.py` the book and authors records are inserted.
+* `generate_authors()` and `generate_books()` generates given number of random data and then in 
+`generate_books()` authors are assigned to books.
+
 ### Provided Tasks
-* Find and print all fields of the book with maximum number of pages
-* Find and print the average of the number of pages
-* Print the youngest author
-* Print the authors who have not written any books yet
-* Find 5 authors with more than 3 books (Bonus Task)
+In `tasks.py` these tasks are handled by the methods:
+* `get_biggest_book()` - finds and prints all fields of the book with maximum number of pages
+* `get_avg_page_count()` - finds and prints the average of the number of pages
+* `get_youngest_authors()` - prints the youngest author
+* `get_authors_with_no_books()` - prints the authors who have not written any books yet
+* `bonus()` - finds 5 authors with more than 3 books (Bonus Task)
 
 
 ## Usage

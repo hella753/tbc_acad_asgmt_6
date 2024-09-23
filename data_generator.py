@@ -16,6 +16,10 @@ GENRES = [
 
 class DataGenerator(Faker):
     def __init__(self) -> None:
+        """
+        A subclass of Faker, and adds necessary providers for generating
+        fake data such as text, names, dates.
+        """
         super().__init__()
         self.add_provider(lorem)
         self.add_provider(date_time)
@@ -23,6 +27,16 @@ class DataGenerator(Faker):
         self.add_provider(person)
 
     def generate_authors(self, num: int) -> List[Author]:
+        """
+        Generates a list of Author objects with random data.
+
+        Arguments:
+            num {int} -- The number of authors to generate.
+
+        Returns:
+            List[Author] -- A list containing Author objects, with randomly
+            generated first name, last name, date of birth, and city of birth.
+        """
         authors_list: List[Author] = []
         for i in range(1, num + 1):
             first_name: str = self.first_name()
@@ -43,6 +57,22 @@ class DataGenerator(Faker):
         return authors_list
 
     def generate_books(self, num: int, authors: List[Author]) -> List[Book]:
+        """
+        Generates a list of Book objects with random data and
+        assigns them to authors. We have two set of data for
+        authors with books and without. if num authors generates
+        0 authors there will be books without an assigned author.
+
+        Arguments:
+            num {int} -- The number of books to generate.
+            authors {List[Author]} -- A list of Author objects
+            to assign to books.
+
+        Returns:
+            List[Book] -- A list of Book objects, with a random name, category,
+            number of pages, and publication date. A random number of authors
+            from the input list are assigned to each book.
+        """
         books_list: List[Book] = []
         all_authors_set: Set[Author] = set(authors)
         num_authors_without_books = random.randint(15, 100)
@@ -52,7 +82,9 @@ class DataGenerator(Faker):
                 num_authors_without_books
             )
         )
-        authors_with_books: List[Author] = list(all_authors_set - authors_without_books)
+        authors_with_books: List[Author] = list(
+            all_authors_set - authors_without_books
+        )
 
         for i in range(1, num + 1):
             random_digit: int = self.random_int(min=15, max=1000)
@@ -67,7 +99,10 @@ class DataGenerator(Faker):
                 date=date
             )
             num_authors = random.randrange(0, 3)
-            book_authors: List[Author] = random.sample(authors_with_books, num_authors)
+            book_authors: List[Author] = random.sample(
+                authors_with_books,
+                num_authors
+            )
             for author in book_authors:
                 book.authors.append(author)
 
