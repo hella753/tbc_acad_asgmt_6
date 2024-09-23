@@ -1,7 +1,7 @@
 # DB Operation with SqlAlchemy
 
 ## Description
-Books database with fake random data created and managed with sqlAlchemy.
+Books database with fake random data created and managed with SQLAlchemy.
 Database consists of three tables for '**books**' with 1000 records, '**authors**' with 500 records
 and an association table for '**authors_and_books**'. Uses many-to-many relationship.
 
